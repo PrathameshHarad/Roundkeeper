@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#f4f6f1">
+    <meta name="description" content="A simple, quick scorekeeper for game night.">
+    <title>Roundkeeper by Pratham — Game night, in sync</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Roundkeeper home">
+          <span class="brand-mark" aria-hidden="true">R</span>
+          <span>roundkeeper by Pratham</span>
+        </a>
+        <span class="saved-indicator"><span class="saved-dot"></span> Saved on this device</span>
+      </header>
+
+      <main id="main-content">
+        <section class="welcome-panel" id="empty-state" hidden>
+          <span class="eyebrow">MAKE EVERY ROUND COUNT</span>
+          <h1>Game night,<br>in sync.</h1>
+          <p>Keep the score, settle the “whose turn?” debate, and get back to playing.</p>
+          <button class="button button-primary" id="empty-create-game" type="button">＋&nbsp; Start a new game</button>
+        </section>
+
+        <div id="game-view" hidden>
+          <section class="game-heading">
+            <div class="game-heading-copy">
+              <span class="eyebrow">YOUR GAME NIGHT</span>
+              <h1 id="game-name">Game night</h1>
+              <p class="game-subtitle">A little friendly competition.</p>
+            </div>
+            <div class="game-tools">
+              <label class="game-picker-label" for="game-picker">Switch game
+                <select id="game-picker" aria-label="Select a saved game"></select>
+              </label>
+              <button class="button button-new-game" id="new-game-button" type="button">＋ New game</button>
+            </div>
+          </section>
+
+          <section class="round-banner" aria-live="polite">
+            <div class="round-copy">
+              <span class="round-label">UP NEXT</span>
+              <strong>Round <span id="next-round">1</span></strong>
+              <span class="round-hint">Tap a player to record the winner</span>
+            </div>
+            <span class="round-icon" aria-hidden="true">✳</span>
+          </section>
+
+          <div class="content-grid">
+            <section class="panel players-panel" aria-labelledby="players-title">
+              <div class="section-heading">
+                <div>
+                  <span class="eyebrow">AT THE TABLE</span>
+                  <h2 id="players-title">Players <span class="count-pill" id="player-count">0</span></h2>
+                </div>
+              </div>
+              <div class="player-list" id="player-list"></div>
+              <form class="add-player-form" id="add-player-form">
+                <label class="sr-only" for="player-name">Player name</label>
+                <input id="player-name" name="player-name" type="text" maxlength="32" placeholder="Add a player..." autocomplete="off" required>
+                <button class="button button-add" type="submit" aria-label="Add player">＋</button>
+              </form>
+              <p class="form-message" id="player-message" aria-live="polite"></p>
+            </section>
+
+            <section class="panel leaderboard-panel" aria-labelledby="leaderboard-title">
+              <div class="section-heading">
+                <div>
+                  <span class="eyebrow">THE SCORE SO FAR</span>
+                  <h2 id="leaderboard-title">Leaderboard</h2>
+                </div>
+              </div>
+              <div id="leaderboard" class="leaderboard"></div>
+            </section>
+
+            <section class="panel rounds-panel" aria-labelledby="rounds-title">
+              <div class="section-heading rounds-heading">
+                <div>
+                  <span class="eyebrow">EVERY WIN, ACCOUNTED FOR</span>
+                  <h2 id="rounds-title">Round history</h2>
+                </div>
+                <button class="button button-quiet" id="undo-button" type="button">↶&nbsp; Undo last</button>
+              </div>
+              <div id="round-history" class="round-history"></div>
+            </section>
+          </div>
+        </div>
+      </main>
+
+      <footer class="app-footer"><span>Good games. Good company.</span><span>✳</span></footer>
+    </div>
+
+    <dialog id="create-game-dialog" class="game-dialog">
+      <form id="create-game-form">
+        <button class="dialog-close" type="button" aria-label="Close">×</button>
+        <span class="eyebrow">LET’S GET STARTED</span>
+        <h2>Name your game</h2>
+        <p>Give this game night a name you’ll recognize later.</p>
+        <label class="sr-only" for="new-game-name">Game name</label>
+        <input id="new-game-name" name="game-name" type="text" maxlength="48" placeholder="e.g. Friday board games" required>
+        <button class="button button-primary dialog-submit" type="submit">Create game</button>
+      </form>
+    </dialog>
+  </body>
+</html>
